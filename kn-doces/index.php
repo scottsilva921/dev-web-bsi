@@ -47,11 +47,6 @@
                         <label for="pwd" class="form-label">Senha:</label>
                         <input type="password" class="form-control" id="senhaUsuario" placeholder="Digite sua senha" name="senhaUsuario">
                     </div>
-                    <div class="form-check mb-3">
-                        <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="remember">Lembre-me
-                        </label>
-                    </div>
                     <button type="submit" class="btn btn-primary">Entrar</button>
                     <p>Ou</p>
                     <a href="tela_cadastro.php" class="btn btn-primary">Cadastrar-se</a>

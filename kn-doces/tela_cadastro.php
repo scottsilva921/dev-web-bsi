@@ -77,12 +77,7 @@
                     </div>
 
                     <div class="row p-2">
-                        <button type="submit" class="btn btn-primary">Cadastrar-se</button>
-
-                        <p class="text-center">Ou</p>
-
-                        <button type="submit" class="btn btn-primary">Entrar</button>
-                        
+                        <button type="submit" class="btn btn-primary">Pronto</button>
                     </div>
                 </form>
 
