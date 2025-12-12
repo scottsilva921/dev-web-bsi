@@ -63,13 +63,10 @@
                 .then(data => {
                     if (data.success) { // Verifica se o PHP retornou sucesso
                         alert("Produto adicionado com sucesso!");
-                        // 1. Encontra o elemento Modal
                         const meuModal = document.getElementById('modalAdicionarCarrinho');
                         
-                        // 2. Cria uma instância do objeto Modal do Bootstrap 5 (necessário)
                         const modalInstancia = bootstrap.Modal.getInstance(meuModal) || new bootstrap.Modal(meuModal);
                         
-                        // 3. Fecha o Modal
                         modalInstancia.hide();
                     } else {
                         alert("Erro ao adicionar o produto: " + data.message);
