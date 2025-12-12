@@ -16,25 +16,52 @@
     $array = mysqli_fetch_array($select);
     $senhaUsuario = $array["senhaUsuario"];
 
-    if($emailUsuario == "" || $emailUsuario == null || $nomeUsuario == "" || $nomeUsuario == NULL || $nascUsuario == "" || $nascUsuario == NULL || $senhaAntiga == "" || $senhaAntiga == NULL || $senhaNova == "" || $senhaNova == NULL){
-        echo"<script language='javascript' type='text/javascript'>
-        alert('Todos os campos devem estar preenchidos!');window.location.href='
-        tela_sua_conta.php';</script>";
+    if(($emailUsuario == "" || $emailUsuario == null) || ($nomeUsuario == "" || $nomeUsuario == NULL) || ($nascUsuario == "" || $nascUsuario == NULL)){
+        echo "<script language='javascript' type='text/javascript'>alert('Todos os campos devem estar preenchidos!');window.location.href='tela_sua_conta.php';</script>";
     }
     else{
-        if ($senhaAntiga != $senhaUsuario){
-            echo"<script language='javascript' type='text/javascript'>
-            alert('Senha antiga está incorreta!');window.location.href='
-            tela_sua_conta.php';</script>";
-        }
-        else{
-            $query_update = "UPDATE usuario SET nomeUsuario = '$nomeUsuario', emailUsuario = '$emailUsuario', nascUsuario = '$nascUsuario', senhaUsuario = '$senhaNova' WHERE idUsuario = '$idUsuario'";
+        
+        if($senhaAntiga == "" || $senhaAntiga == null){
+            $query_update = "UPDATE usuario SET nomeUsuario = '$nomeUsuario', emailUsuario = '$emailUsuario', nascUsuario = '$nascUsuario' WHERE idUsuario = '$idUsuario'";
             $update = mysqli_query($connect, $query_update);
 
-            mysqli_close($connect);
-            $_SESSION["emailUsuario"] = $emailUsuario;
+            if($update){
+                $_SESSION["emailUsuario"] = $emailUsuario;
+                mysqli_close($connect);
+                echo "<script language='javascript' type='text/javascript'>
+                alert('Dados alterados com sucesso! Senha não alterada!');window.location.href='tela_sua_conta.php';</script>";
+            }
+            else{
+                mysqli_close($connect);
+                echo "<script language='javascript' type='text/javascript'>
+                alert('Não foi possível alterar os dados do usuário! Erro: " .mysqli_error($connect). "');window.location.href='tela_sua_conta.php';</script>";
+            }
+        }
+        else{
+            if ($senhaAntiga != $senhaUsuario){
+                mysqli_close($connect);
+                echo "<script language='javascript' type='text/javascript'>alert('Senha antiga está incorreta!');window.location.href='tela_sua_conta.php';</script>";
+            }
+            else{
+                $query_update = "UPDATE usuario SET nomeUsuario = '$nomeUsuario', emailUsuario = '$emailUsuario', nascUsuario = '$nascUsuario', senhaUsuario = '$senhaNova' WHERE idUsuario = '$idUsuario'";
+                $update = mysqli_query($connect, $query_update);
+
+                if($update){
+                    mysqli_close($connect);
+                    $_SESSION["emailUsuario"] = $emailUsuario;
+                    echo "<script language='javascript' type='text/javascript'>
+                    alert('Dados alterados com sucesso! Senha alterada!');window.location.href='tela_sua_conta.php';</script>";
+                    
+                }
+                else{
+                    mysqli_close($connect);
+                    echo "<script language='javascript' type='text/javascript'>
+                    alert('Não foi possível alterar os dados do usuário! Erro: " .mysqli_error($connect). "');window.location.href='tela_sua_conta.php';</script>";
+                }
+            }
+            
 
         }
     }
-    header('Location: tela_sua_conta.php');
+    echo "<script language='javascript' type='text/javascript'>window.location.href='tela_sua_conta.php';</script>";
 ?>

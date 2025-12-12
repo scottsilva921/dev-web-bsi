@@ -33,9 +33,17 @@
 
                 <form class="shadow p-3 mb-5 rounded form-login" method="POST" action="cadastro.php">
 
-                    <div class="p-2 bg-1 text-white text-center">
-                        <img class="img-logo" src="imagens/logo.png">
-                        <h2 class="">Cadastrar-se</h2>
+                    <div class="row p-2 bg-1 text-white text-center">
+                        <div class="col-2 d-flex align-items-center">
+                            <a href="index.php" class="btn bg-3"><i class="fa-solid fa-arrow-left"></i></a>
+                        </div>
+
+                        <div class="col-8">
+                            <img class="img-logo" src="imagens/logo.png">
+                            <h2 class="">Cadastrar-se</h2>
+                        </div>
+
+                        <div class="col-2"></div>
                     </div>
 
                     <div class="row">
@@ -77,7 +85,7 @@
                     </div>
 
                     <div class="row p-2">
-                        <button type="submit" class="btn btn-primary">Pronto</button>
+                        <button type="submit" class="btn bg-3">Pronto</button>
                     </div>
                 </form>
 

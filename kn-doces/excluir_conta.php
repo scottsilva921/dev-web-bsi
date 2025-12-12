@@ -13,5 +13,5 @@
     $delete = mysqli_query($connect, $query_delete);
 
     mysqli_close($connect);
-    header('Location: sair.php');
+    echo "<script language='javascript' type='text/javascript'>window.location.href='sair.php';</script>";
 ?>

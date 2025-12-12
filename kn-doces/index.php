@@ -47,9 +47,9 @@
                         <label for="pwd" class="form-label">Senha:</label>
                         <input type="password" class="form-control" id="senhaUsuario" placeholder="Digite sua senha" name="senhaUsuario">
                     </div>
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <button type="submit" class="btn bg-3">Entrar</button>
                     <p>Ou</p>
-                    <a href="tela_cadastro.php" class="btn btn-primary">Cadastrar-se</a>
+                    <a href="tela_cadastro.php" class="btn bg-3">Cadastrar-se</a>
                 </form>
 
             </div>

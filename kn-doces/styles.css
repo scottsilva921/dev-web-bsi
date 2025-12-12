@@ -7,6 +7,10 @@ body{
     background-color: #79dcf0;
 }
 
+.btn:hover{
+    background-color: #0487D9 !important;
+}
+
 .img-logo{
     height:150px;
 }
@@ -15,7 +19,7 @@ h1, h2{
     color: #5f2a24;
 }
 
-h3{
+h3, h4{
     color: #9c5a43;
 }
 
@@ -70,6 +74,34 @@ table img{
     background-color: #c5f5ff;
 }
 
+.bg-3{
+    background-color: #5f2a24;
+}
+
+.bg-3:hover{
+    background-color: #8f423a !important;
+    color: white;
+}
+
+.bg-darkred{
+    background-color: darkred;
+}
+
+.bg-darkred:hover{
+    background-color: rgb(184, 27, 27) !important;
+    color: white;
+}
+
+.bg-4{
+    background-color: #a42c2b;
+}
+
+.bg-4:hover{
+    background-color: #b74a4a !important;
+    color: white;
+}
+
+
 .navbar{
     background-color: #5f2a24;
     color: white;
@@ -97,3 +129,27 @@ table img{
     border: gray 1px solid;
     object-fit: cover;
 }
+
+.table-carrinho{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-carrinho th{
+    background-color: #79dcf0;
+}
+
+.table-carrinho th, td{
+    width: 33%;
+    height: 50px;
+    padding-left: 15px;
+}
+.table-carrinho img{
+    width: 90px;
+    height: 90px;
+    margin-right: 10px;
+}
+.table-carrinho input{
+    width: 80px;
+}
+.table-carrinho tr:nth-child(even) {background-color: #9beeffff;}

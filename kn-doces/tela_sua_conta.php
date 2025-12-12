@@ -57,9 +57,17 @@
 
                 <form class="shadow p-3 mb-5 rounded form-login" method="POST" action="alterar_dados_usuario.php">
 
-                    <div class="p-2 bg-1 text-white text-center">
-                        <a href="tela_inicial.php"><img class="img-logo" src="imagens/logo.png"></a>
-                        <h2 class="">Seus Dados</h2>
+                    <div class="row p-2 bg-1 text-white text-center">
+                        <div class="col-2 d-flex align-items-center">
+                            <a href="tela_inicial.php" class="btn bg-3"><i class="fa-solid fa-arrow-left"></i></a>
+                        </div>
+
+                        <div class="col-8">
+                            <img class="img-logo" src="imagens/logo.png">
+                            <h2 class="">Seus dados</h2>
+                        </div>
+
+                        <div class="col-2"></div>
                     </div>
 
                     <div class="row">
@@ -87,25 +95,25 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label for="pwd" class="form-label">Senha Antiga:</label>
-                                <input type="password" name="senhaAntigaConta" id="senhaAntigaConta" class="form-control" value="<?php echo $senhaUsuario?>">
+                                <input type="password" name="senhaAntigaConta" id="senhaAntigaConta" class="form-control" value="">
                             </div>
                         </div>
 
                         <div class="col">
                             <div class="mb-3">
                                 <label for="pwd" class="form-label">Nova Senha:</label>
-                                <input type="password" name="senhaNovaConta" id="senhaNovaConta" class="form-control" Value="<?php echo $senhaUsuario?>">
+                                <input type="password" name="senhaNovaConta" id="senhaNovaConta" class="form-control" Value="">
                             </div>
                         </div>
 
                     </div>
 
                     <div class="row p-2">
-                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        <button type="submit" class="btn bg-3">Salvar Alterações</button>
                         <p></p>
-                        <a href="sair.php" class="btn btn-primary">Sair</a>
+                        <a href="sair.php" class="btn bg-4">Sair</a>
                         <p></p>
-                        <a href="excluir_conta.php" class="btn bg-red">Excluir Conta</a>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalDelete" class="btn bg-darkred">Excluir Conta</a>
                         
                     </div>
                 </form>
@@ -115,6 +123,31 @@
             <div class="col-sm-4">
             </div>
 
+        </div>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="modalDelete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Exluir conta</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Deseja realmente excluir sua conta?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <a href="excluir_conta.php" class="btn bg-darkred">Exluir</a>
+            </div>
+
+            </div>
+        </div>
         </div>
 
     </body>

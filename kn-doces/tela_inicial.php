@@ -41,12 +41,44 @@
         </title>
 
         <script>
-            function chamarAdicionarCarrinho(idPedido){
+            function setarIdProduto(idProduto){
+                document.getElementById("idProdutoSelecionado").value = idProduto;
+            }
+            
+            function chamarAdicionarCarrinho(){
+                const qtdProdutos = document.getElementById("qtdProdutos").value;
+                const idProduto = document.getElementById("idProdutoSelecionado").value;
+
+                if (!idProduto || qtdProdutos < 1) {
+                    alert("Selecione um produto e uma quantidade válida.");
+                    return;
+                }
+
                 fetch('adicionar_ao_carrinho.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'idProduto='+idPedido
+                    body: 'idProduto='+idProduto+'&qtdProdutos='+qtdProdutos
                 })
+                .then(response => response.json()) // Espera uma resposta JSON do PHP
+                .then(data => {
+                    if (data.success) { // Verifica se o PHP retornou sucesso
+                        alert("Produto adicionado com sucesso!");
+                        // 1. Encontra o elemento Modal
+                        const meuModal = document.getElementById('modalAdicionarCarrinho');
+                        
+                        // 2. Cria uma instância do objeto Modal do Bootstrap 5 (necessário)
+                        const modalInstancia = bootstrap.Modal.getInstance(meuModal) || new bootstrap.Modal(meuModal);
+                        
+                        // 3. Fecha o Modal
+                        modalInstancia.hide();
+                    } else {
+                        alert("Erro ao adicionar o produto: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert("Falha na comunicação com o servidor.");
+                    console.error('Erro:', error);
+                });
             }
         </script>
     </head>
@@ -103,7 +135,7 @@
                         </div>
                     </div>
 
-                    <!--<p class="text-center"><b>Já temos mais 5.000 clientes cadastrados e satisfeitos!</b></p>-->
+                    <p class="text-center"><b>Já temos mais 5.000 clientes cadastrados e satisfeitos!</b></p>
 
                 </form>
 
@@ -127,39 +159,12 @@
                                         <div class="card-body">
                                             <h4 class="card-title">',$nomeProduto,'</h4>
                                             <p class="card-text">',$descProduto,'</p>
-                                            <button onclick="chamarAdicionarCarrinho(',$idProduto,')" class="btn btn-primary">Adicionar ao carrinho</button>
+                                            <button onclick="setarIdProduto(',$idProduto,')" type="button" data-bs-toggle="modal" data-bs-target="#modalAdicionarCarrinho" class="btn bg-3">Adicionar ao carrinho</button>
                                         </div>
                                     </div>';
                             }
                         ?>
-                        <!--
-                        <div class="card" style="width:33%">
-                            <img class="card-img-top" src="imagens/palha-chocolate.jpg" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">Palha Italiana</h4>
-                                <p class="card-text">A campeã de vendas!</p>
-                                <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
-                            </div>
-                        </div>
-
-                        <div class="card" style="width:33%">
-                            <img class="card-img-top" src="imagens/pe-de-moca.jpg" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">Pé de Moça</h4>
-                                <p class="card-text">O doce de amendoim mais querido!</p>
-                                <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
-                            </div>
-                        </div>
-
-                        <div class="card" style="width:33%">
-                            <img class="card-img-top" src="imagens/cocada.jpg" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">Cocada</h4>
-                                <p class="card-text">A melhor cocada que você já experimentou!</p>
-                                <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
-                            </div>
-                        </div>
-                        -->
+                        
                     </div>
                     
                     
@@ -174,15 +179,41 @@
                     </div>
                 
                     <div id="redes-sociais" class="py-5 text-center">
-                        <h2>Nos siga em nossas redes sociais</h2>
-                        <a href="https://www.instagram.com/kndoceseguloseimas?igsh=MWN0bXoxbnhkMDI3Yg==" class="btn bg-danger"><i class="fa-brands fa-instagram"></i>@kndoceseguloseimas</a>
-                        <a href="https://www.instagram.com/kndoceseguloseimas?igsh=MWN0bXoxbnhkMDI3Yg==" class="btn btn-primary"><i class="fa-brands fa-facebook"></i>@kndoceseguloseimas</a>
-                        <a href="https://www.instagram.com/kndoceseguloseimas?igsh=MWN0bXoxbnhkMDI3Yg==" class="btn bg-info"><i class="fa-brands fa-twitter"></i>@kndoceseguloseimas</a>
+                        <h2>Nos siga em nossas redes sociais</h2><br>
+                        <a href="https://www.instagram.com/kndoceseguloseimas?igsh=MWN0bXoxbnhkMDI3Yg==" target="_blank" class="btn bg-danger"><i class="fa-brands fa-instagram"></i>@kndoceseguloseimas</a>
+                        <a href="https://www.instagram.com/kndoceseguloseimas?igsh=MWN0bXoxbnhkMDI3Yg==" target="_blank" class="btn btn-primary"><i class="fa-brands fa-facebook"></i>@kndoceseguloseimas</a>
+                        <a href="https://www.instagram.com/kndoceseguloseimas?igsh=MWN0bXoxbnhkMDI3Yg==" target="_blank" class="btn bg-info"><i class="fa-brands fa-twitter"></i>@kndoceseguloseimas</a>
                     </div>
 
             </div>
 
             <div class="col-sm-2"></div>
+        </div>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="modalAdicionarCarrinho">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Adicionar ao carrinho</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Quantos produtos deseja adicionar <input type="number" name="qtdProdutos" id="qtdProdutos" class="form-control" value="1">
+                <input type="hidden" id="idProdutoSelecionado" value="">
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" onclick="chamarAdicionarCarrinho()" class="btn bg-3">Adicionar</button>
+            </div>
+
+            </div>
+        </div>
         </div>
 
         <div class="mt-5 p-4 bg-dark text-white text-center">
